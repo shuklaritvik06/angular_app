@@ -1,6 +1,4 @@
-# Fyle Assignment Angular App
-
-This project is an Angular application developed for the Fyle Internship Challenge. The app allows users to search for Github users by their username, view repositories associated with the searched user, and paginate through the repositories with server-side pagination. The application also includes features such as a search bar, zero state handling, skeleton loaders during API calls, and caching of GET API calls to external APIs.
+# Assignment Angular App
 
 ## Features
 
@@ -24,16 +22,16 @@ This project is an Angular application developed for the Fyle Internship Challen
 
 To run the application locally, follow these steps:
 
-1. Clone the repository from [GitHub](https://github.com/shuklaritvik06/fyle_assignment_angular).
+1. Clone the repository from [GitHub](https://github.com/shuklaritvik06/angular_app).
 
    ```bash
-   git clone https://github.com/shuklaritvik06/fyle_assignment_angular.git
+   git clone https://github.com/shuklaritvik06/angular_app.git
    ```
 
 2. Navigate into the project directory.
 
    ```bash
-   cd fyle_assignment_angular
+   cd angular_app
    ```
 
 3. Install dependencies using npm.

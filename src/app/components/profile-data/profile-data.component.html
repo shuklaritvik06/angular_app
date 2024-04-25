@@ -1,0 +1,100 @@
+<div class="w-full flex justify-between items-center mb-4">
+  <div class="flex-1 relative">
+    <label for="searchInput" class="sr-only">Search</label>
+    <input
+      id="searchInput"
+      type="text"
+      (change)="onChangeSearchQuery($event)"
+      placeholder="Search"
+      class="w-full border border-gray-300 rounded-lg p-2 pr-10 focus:outline-none focus:border-blue-500"
+    />
+    <button
+      type="button"
+      (click)="searchUser()"
+      class="absolute inset-y-0 right-0 px-4 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600"
+    >
+      Search
+    </button>
+  </div>
+  <div class="ml-4">
+    <label for="noOfElementsSelect" class="sr-only"
+      >Select No Of Elements</label
+    >
+    <select
+      id="noOfElementsSelect"
+      title="Select No Of Elements"
+      (change)="onChangeElements($event)"
+      class="border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-blue-500"
+    >
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+</div>
+
+<div
+  *ngIf="repoData.length === 0 && !loading; else userData"
+  class="mt-8 text-center"
+>
+  No Data Found. Please search for a user.
+</div>
+
+<ng-template #userData>
+  <div class="w-full flex justify-center">
+    <div class="w-52 h-52 bg-gray-300 rounded-full my-5">
+      <img
+        *ngIf="repoData[0]?.owner"
+        [src]="repoData[0].owner.avatar_url"
+        alt=""
+        class="w-full h-full rounded-full"
+      />
+    </div>
+  </div>
+  <div class="overflow-auto h-[600px] py-3">
+    <div
+      *ngFor="let item of repoData; let i = index"
+      [id]="i"
+      class="bg-white rounded-lg shadow-md p-4 h-fit"
+    >
+      <div class="font-bold">{{ item.name }}</div>
+      <div class="text-gray-600">{{ item.full_name }}</div>
+      <div class="flex flex-wrap gap-2 mt-2">
+        <div *ngFor="let topic of item.topics">
+          <app-repo-tags [tag]="topic"></app-repo-tags>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="!loading && repoData.length !== 0" class="mt-5 flex justify-center">
+  <div class="flex items-center gap-3">
+    <button
+      type="button"
+      [disabled]="page_num == 1"
+      [ngClass]="{
+        'bg-gray-300 cursor-not-allowed': page_num == 1,
+        'bg-blue-500 hover:bg-blue-600': page_num !== 1
+      }"
+      class="text-white px-4 py-2 rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300"
+      (click)="prev()"
+    >
+      Previous
+    </button>
+    <div>{{ page_num }}/{{ last_page }}</div>
+    <button
+      type="button"
+      [disabled]="page_num == last_page"
+      [ngClass]="{
+        'bg-gray-300 cursor-not-allowed': page_num == last_page,
+        'bg-blue-500 hover:bg-blue-600': page_num !== last_page
+      }"
+      class="text-white px-4 py-2 rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300"
+      (click)="incr()"
+    >
+      Next
+    </button>
+  </div>
+</div>

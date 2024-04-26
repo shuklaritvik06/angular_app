@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './childroutes.component.html',
-  styleUrl: './childroutes.component.css'
+  styleUrl: './childroutes.component.css',
 })
-export class ChildroutesComponent {
-
-}
+export class ChildroutesComponent {}

@@ -28,7 +28,7 @@ export class ProfileDataComponent {
   onChangeElements(event: Event) {
     this.page_num = 1;
     this.noOfElements = (event.target as HTMLSelectElement).value;
-    this.searchUser();
+    this.last_page = undefined;
   }
 
   onChangeSearchQuery(event: Event) {

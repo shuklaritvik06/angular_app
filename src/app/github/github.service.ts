@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { GITHUB_API_BASE_URL } from '../../../constants/fylehq.constants';
 import { IGithubData } from '../../../types/fylehq.types';
 
@@ -16,6 +16,15 @@ export class GithubService {
     page_size: string
   ): Observable<any> {
     const apiUrl = `${GITHUB_API_BASE_URL}/${username}/repos?per_page=${page_size}&page=${page_num}`;
-    return this.http.get<IGithubData>(apiUrl, { observe: 'response' });
+    return this.http
+      .get<IGithubData>(apiUrl, { observe: 'response' })
+      .pipe(catchError(this.handleError));
+  }
+
+  handleError(error: HttpErrorResponse) {
+    console.error('Error fetching user:', error);
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }

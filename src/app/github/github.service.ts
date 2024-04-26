@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GITHUB_API_BASE_URL } from '../../../../constants/fylehq.constants';
-import { IGithubData } from '../../../../types/fylehq.types';
+import { GITHUB_API_BASE_URL } from '../../../constants/fylehq.constants';
+import { IGithubData } from '../../../types/fylehq.types';
 
 @Injectable({
   providedIn: 'root',

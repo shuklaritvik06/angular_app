@@ -20,11 +20,15 @@ export class ProfileDataComponent {
   loading: boolean = false;
   page_num: number = 1;
   last_page: number | undefined;
+  show_switch: boolean = false;
+  switch_element: string = 'HELLO';
 
   constructor(private githubService: GithubService) {}
 
   onChangeElements(event: Event) {
+    this.page_num = 1;
     this.noOfElements = (event.target as HTMLSelectElement).value;
+    this.searchUser();
   }
 
   onChangeSearchQuery(event: Event) {
@@ -37,6 +41,7 @@ export class ProfileDataComponent {
       return;
     }
 
+    this.repoData = [];
     this.loading = true;
 
     this.githubService
@@ -45,7 +50,7 @@ export class ProfileDataComponent {
         next: (resp: HttpResponse<IGithubData>) => {
           this.repoData = resp.body || [];
           this.loading = false;
-          this.getLastPage(resp.headers.get('Link')!);
+          if (!this.last_page) this.getLastPage(resp.headers.get('Link')!);
         },
         error: (error) => {
           this.repoData = [];
@@ -64,12 +69,14 @@ export class ProfileDataComponent {
   incr() {
     if (this.last_page !== undefined && this.page_num < this.last_page) {
       this.page_num += 1;
+      this.searchUser();
     }
   }
 
   prev() {
     if (this.page_num > 1) {
       this.page_num -= 1;
+      this.searchUser();
     }
   }
 }

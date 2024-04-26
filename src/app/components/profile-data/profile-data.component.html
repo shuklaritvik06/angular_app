@@ -3,6 +3,7 @@
     <label for="searchInput" class="sr-only">Search</label>
     <input
       id="searchInput"
+      #search
       type="text"
       (change)="onChangeSearchQuery($event)"
       placeholder="Search"
@@ -35,11 +36,12 @@
 </div>
 
 <div
-  *ngIf="repoData.length === 0 && !loading; else userData"
-  class="mt-8 text-center"
->
-  No Data Found. Please search for a user.
-</div>
+  *ngIf="repoData.length !== 0 && !loading; then userData; else elseBlock"
+></div>
+
+<ng-template #elseBlock>
+  <div class="mt-8 text-center">No Data Found. Please search for a user.</div>
+</ng-template>
 
 <ng-template #userData>
   <div class="w-full flex justify-center">
@@ -96,5 +98,12 @@
     >
       Next
     </button>
+  </div>
+</div>
+
+<div *ngIf="show_switch">
+  <div [ngSwitch]="switch_element">
+    <div *ngSwitchCase="'HELLO'">output</div>
+    <div *ngSwitchDefault>output2</div>
   </div>
 </div>

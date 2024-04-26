@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { GithubService } from '../../services/github/github.service';
 import { IGithubData } from '../../../../types/fylehq.types';
 import { CommonModule } from '@angular/common';
 import { RepoTagsComponent } from '../repo-tags/repo-tags.component';
 import { HttpResponse } from '@angular/common/http';
+import { GithubService } from '../../github/github.service';
 
 @Component({
   selector: 'app-profile-data',
